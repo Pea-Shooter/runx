@@ -1,5 +1,9 @@
+[toc]
+
 ## 一、runx介绍
-runx是NVIDIA官方刚放出来的一个深度学习实验管理工具，可以在做实验的同时很方便地实现下列一些常用的功能：
+
+**runx** [origin repo](https://github.com/NVIDIA/runx) 是NVIDIA官方刚放出来的一个深度学习实验管理工具，可以在做实验的同时很方便地实现下列一些常用的功能：
+
 * 超参数、计算资源等的配置和记录
 * 实验过程、实验结果、日志等的记录
 * 实验总结
@@ -248,8 +252,9 @@ run2    0.01  adam    98.1  10     5:25
 ## 三、如何在brain++上使用runx
 我根据rlaunch的命令格式把runx的源码改了一下，经测试可以在brain++上使用。直接把源码down下来按照上面的源码安装就OK了。安装以后可以利用源码中的example测试：
 
-### runx
-把.runx修改为如下格式,logroot设置成你自己的路径：
+**1. runx**
+
+把.runx修改为如下格式,logroot设置成你自己的路径，submit_cmd改成rlaunch：
 ```
 LOGROOT: /data/log/nndistortion
 FARM: bigfarm
@@ -261,7 +266,7 @@ bigfarm:
      cpu: 16
      memory: 20000
 ```
-mnist.yml修改为如下：
+mnist.yml修改为如下（去掉原来的cd）：
 ```
 CMD: python mnist.py
 
@@ -270,18 +275,22 @@ HPARAMS:
    momentum: [0.5， 0.25]
    logdir: LOGDIR
 ```
-然后运行
+其他的tag可以按照第二部分的模块使用说明设置，然后运行
 ```
 python -m runx.runx mnist.yml
 ```
 即可。
 
-### logx
+**2. logx**
+
 logx直接看example里的训练代码。
 
-### sumx
+**3. sumx**
+
 实验运行完成以后运行：
 ```
 python -m runx.sumx mnist
 ```
 就可以得到一个简单的实验结果总结。
+
+> 这里需要指出的是，一组farm没有并发执行，但是可以根据自己的参数多设置几组farm，一次运行多个yaml文件就行。后续有时间可以尝试加入多线程并发执行。
