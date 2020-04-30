@@ -6,4 +6,4 @@ bigfarm:
   RESOURCES:
      gpu: 2
      cpu: 16
-     mem: 128
+     memory: 20000
