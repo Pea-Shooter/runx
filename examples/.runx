@@ -1,8 +1,8 @@
-LOGROOT: /home/logs
+LOGROOT: /data/logs
 FARM: bigfarm
 
 bigfarm:
-  SUBMIT_CMD: 'submit_job'
+  SUBMIT_CMD: 'rlaunch'
   RESOURCES:
      gpu: 2
      cpu: 16

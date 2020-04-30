@@ -307,6 +307,9 @@ def run_yaml(experiment, exp_name, runroot):
         cmd = construct_cmd(submit_cmd, hparams,
                             resource_copy, job_name, logdir)
 
+        cmd = cmd.replace("\'", "")
+        cmd = cmd.replace("command", "")
+
         if not args.no_run:
             # copy code to NFS-mounted share
             copy_code(logdir, runroot, code_ignore_patterns)
@@ -319,6 +322,8 @@ def run_yaml(experiment, exp_name, runroot):
             os.chdir(logdir)
 
             print('Submitting job {}'.format(job_name))
+            code_dir = os.path.join(logdir, 'code')
+            os.chdir(code_dir)
             exec_cmd(cmd)
 
 
