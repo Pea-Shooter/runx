@@ -275,7 +275,7 @@ HPARAMS:
    momentum: [0.5， 0.25]
    logdir: LOGDIR
 ```
-其他的tag可以按照第二部分的模块使用说明设置，然后运行
+其他的tag可以按照第二部分的模块使用说明设置（注意把代码里的data路径改成自己的，我建议把data和code分开，否则每一次都会copy data），然后运行
 ```
 python -m runx.runx mnist.yml
 ```
