@@ -197,11 +197,29 @@ class LogX(object):
         '''
         self.tensorboard.add_image(path, img, step)
 
+    def add_images(self, path, imgs, step=None):
+        '''
+        Write batched image to the tensorboard file
+        '''
+        self.tensorboard.add_images(path, imgs, step)
+
     def add_scalar(self, name, val, idx):
         '''
         Write a scalar to the tensorboard file
         '''
         self.tensorboard.add_scalar(name, val, idx)
+
+    def add_scalars(self, main_tag, tag_scalar_dict, idx):
+        '''
+        Write many scalar data to the tensorboard file
+        '''
+        self.tensorboard.add_scalars(main_tag, tag_scalar_dict, idx)
+
+    def add_graph(self, model, input_to_model=None, verbose=False, profile_with_cuda=False):
+        '''
+        Add graph data to summary
+        '''
+        self.tensorboard.add_graph(model, input_to_model, verbose, profile_with_cuda)
 
     def _flush_tensorboard(self):
         if self.eager_flush and self.tb_writer is not None:
